@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
         sintesis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, SintesisVozActivity.class);
+                startActivity(intent);
             }
         });
 
