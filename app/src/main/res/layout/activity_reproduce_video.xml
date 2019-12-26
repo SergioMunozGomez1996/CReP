@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <VideoView
+        android:id="@+id/superficie"
+        android:layout_gravity="center"
+        android:layout_width="200dip"
+        android:layout_height="200dip"
+        />
+    <TextView
+        android:id="@+id/tiempo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+    <Button
+        android:id="@+id/reproducir"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Reproducir"
+        />
+    <Button
+        android:id="@+id/detener"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Detener"
+        android:enabled="false"
+        />
+
+</LinearLayout>
