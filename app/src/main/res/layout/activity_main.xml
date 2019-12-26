@@ -6,13 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/audioButton"
+        android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:text="Audio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/capturaButton"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:text="Captura"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/audioButton" />
+
+    <Button
+        android:id="@+id/hablaButton"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:text="Habla"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/capturaButton" />
+
+    <Button
+        android:id="@+id/sintesisButton"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:text="Sintesis"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hablaButton" />
+
+    <Button
+        android:id="@+id/videoButton"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:text="Video"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sintesisButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
