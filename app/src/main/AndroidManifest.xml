@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CapturaVideoActivity"></activity>
+        <activity android:name=".HablaActivity"></activity>
+        <activity android:name=".CapturaVideoActivity" />
         <activity android:name=".AudioActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
