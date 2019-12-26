@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         captura.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, CapturaVideoActivity.class);
+                startActivity(intent);
             }
         });
 
