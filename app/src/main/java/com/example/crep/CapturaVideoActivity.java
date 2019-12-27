@@ -41,28 +41,57 @@ public class CapturaVideoActivity extends Activity implements SurfaceHolder.Call
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_captura_video);
-        inicializarInterfaz();
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED &&
-                    ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
-                    ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{
-                        Manifest.permission.CAMERA,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.RECORD_AUDIO
-                }, REQUEST_CAMERA_PERMISSION);
-                return;
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED ||
+                    ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.RECORD_AUDIO)
+                            != PackageManager.PERMISSION_GRANTED ||
+                    ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.CAMERA)
+                            != PackageManager.PERMISSION_GRANTED
+            )  {
+                // Permission is not granted
+                // Should we show an explanation?
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
+                        ActivityCompat.shouldShowRequestPermissionRationale(this,
+                                Manifest.permission.RECORD_AUDIO) ||
+                        ActivityCompat.shouldShowRequestPermissionRationale(this,
+                                Manifest.permission.CAMERA)) {
+                    // Show an explanation to the user *asynchronously* -- don't block
+                    // this thread waiting for the user's response! After the user
+                    // sees the explanation, try again to request the permission.
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA},
+                            REQUEST_CAMERA_PERMISSION);
+
+                } else {
+                    // No explanation needed; request the permission
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA},
+                            REQUEST_CAMERA_PERMISSION);
+
+                    // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                    // app-defined int constant. The callback method gets the
+                    // result of the request.
+                }
+            } else {
+                // Permission has already been granted
+                inicializarInterfaz();
+                // TODO: inicializamos el objeto mediaRecorder
+                mediaRecorder = new MediaRecorder();
+
+                // TODO: obtenemos el holder de la superficie y añadimos el manejador
+                m_holder = superficie.getHolder();
+                m_holder.addCallback(this);
+                m_holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
             }
         }
 
-        // TODO: inicializamos el objeto mediaRecorder
-        mediaRecorder = new MediaRecorder();
 
-        // TODO: obtenemos el holder de la superficie y añadimos el manejador
-        m_holder = superficie.getHolder();
-        m_holder.addCallback(this);
-        m_holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
     }
 
@@ -86,7 +115,7 @@ public class CapturaVideoActivity extends Activity implements SurfaceHolder.Call
             mediaRecorder.release();
 
         }
-    };
+    }
 
     private class ManejadorBotonGrabar implements View.OnClickListener {
         public void onClick(View v) {
@@ -154,6 +183,16 @@ public class CapturaVideoActivity extends Activity implements SurfaceHolder.Call
             {
                 Toast.makeText(this, "You can't use camera without permission", Toast.LENGTH_SHORT).show();
                 finish();
+            }else{
+                inicializarInterfaz();
+                // TODO: inicializamos el objeto mediaRecorder
+                mediaRecorder = new MediaRecorder();
+
+                // TODO: obtenemos el holder de la superficie y añadimos el manejador
+                m_holder = superficie.getHolder();
+                m_holder.addCallback(this);
+                m_holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+                surfaceCreated(m_holder);
             }
         }
     }
